@@ -1,0 +1,5 @@
+train: xray_panoramic_mandible/yolo/train
+val: xray_panoramic_mandible/yolo/valid
+
+nc: 1
+names: ["mandible"]
