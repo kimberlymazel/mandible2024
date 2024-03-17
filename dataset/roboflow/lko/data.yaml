@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 2
+names: ['mandibula', 'mandibulamandibula']
+
+roboflow:
+  workspace: mask-wbqqz
+  project: lko
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/mask-wbqqz/lko/dataset/1
