@@ -6,13 +6,23 @@ Folder to store results of different models for comparation
 ### dataset
 Folder containing different datasets used for the models
 - annotations: Files from Ms. Merve
-- box: Files from the box link
-- box_CLAHE: Box images with CLAHE applied
-- box_jpg: Box images converted from .tiff to .jpg
-- merged: Merged dataset of [Roboflow](https://universe.roboflow.com/noneed/m3-ysqmd) and [Mendeley](https://data.mendeley.com/datasets/hxt48yk462/1)
+- box
+  - box_original: Original box files from link
+  - box_CLAHE: Box images with CLAHE applied
+  - box_jpg: Box images converted from .tiff to .jpg
+- merged
+  - merged1: Merged dataset of [m3-ysqmd](https://universe.roboflow.com/noneed/m3-ysqmd) and [Mendeley](https://data.mendeley.com/datasets/hxt48yk462/1)
+  - merged2: Attempted merged dataset of [m3-ysqmd](https://universe.roboflow.com/noneed/m3-ysqmd), [Mendeley](https://data.mendeley.com/datasets/hxt48yk462/1), [lko](https://universe.roboflow.com/mask-wbqqz/lko), [okl](https://universe.roboflow.com/mask-wbqqz/okl), and [yolonihadatsetobject](https://universe.roboflow.com/yolopg/yolonihadatsetobject)
 - raw: First example of data
-- roboflow: Dataset from [Roboflow](https://universe.roboflow.com/noneed/m3-ysqmd) (mandible and maxilla)
-- roboflow_filtered: Dataset with filtered classes (only mandible)
+- roboflow
+  - lko: Dataset from [lko](https://universe.roboflow.com/mask-wbqqz/lko)
+  - lko_filtered: Filtered lko dataset (only mandible)
+  - noneed: Dataset from [m3-ysqmd](https://universe.roboflow.com/noneed/m3-ysqmd)
+  - noneed_filtered: Filtered noneed dataset (only mandible)
+  - okl: Dataset from [okl](https://universe.roboflow.com/mask-wbqqz/okl)
+  - okl_filtered: Filtered okl dataset (only mandible)
+  - yolonihadatsetobject: Dataset from [yolonihadatsetobject](https://universe.roboflow.com/yolopg/yolonihadatsetobject)
+  - yolonihadatsetobject_filtered: Filtered yolonihadatsetobject dataset (only mandible)
 - xray_panoramic_mandible: Dataset from [Mendeley](https://data.mendeley.com/datasets/hxt48yk462/1)
 
 ### model_src
