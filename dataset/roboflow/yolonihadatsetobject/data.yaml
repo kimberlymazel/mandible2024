@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 9
+names: ['canine', 'cental incisor', 'central incisor', 'lareral incisor', 'lateral incisor', 'mandible', 'maxilla', 'molar', 'premolar']
+
+roboflow:
+  workspace: yolopg
+  project: yolonihadatsetobject
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/yolopg/yolonihadatsetobject/dataset/1
