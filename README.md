@@ -37,5 +37,8 @@ Folder containing PyTorch files of the trained models
 ### src
 Source code other than model running
 
+### scripts
+automate processing
+
 ### yolo_predictions
 Folder containing results of the models based on the box file
