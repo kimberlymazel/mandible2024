@@ -43,7 +43,7 @@ cv.createTrackbar("upper_val", "Limit Selector", upper_val, 255, set_upper_val)
 img_path = os.path.join(os.getcwd(), "dataset", "annotations") # Edit this to target different folder
 images = os.listdir(img_path)
 
-img = cv.imread(os.path.join(img_path, images[0])) # Edit images index to get different image
+img = cv.imread(os.path.join(img_path, images[1])) # Edit images index to get different image
 
 if img.shape[1] > 1080 or img.shape[0] > 1920:
     img = cv.resize(img, (img.shape[1] // 3, img.shape[0] // 3))
