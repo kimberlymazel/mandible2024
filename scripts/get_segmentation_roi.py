@@ -4,7 +4,7 @@ import numpy as np
 
 def get_annotation_lines(img: np.array):
     hsv_img = cv.cvtColor(img, cv.COLOR_BGR2HSV)
-    mask = cv.inRange(hsv_img, (25, 0, 0), (255, 255, 255))
+    mask = cv.inRange(hsv_img, (25, 25, 25), (255, 255, 255))
     return mask
 
 def fill_segmentation(mask: np.array):
