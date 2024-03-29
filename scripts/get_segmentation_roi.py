@@ -19,7 +19,7 @@ def fill_segmentation(mask: np.array):
 if __name__ == "__main__":
     input_folder_path = os.path.join(os.getcwd(), "dataset", "annotations2") # Change folder path
     image_names = list(filter(lambda img: img.split(".")[-1] != "xlsx" and img.split(".")[0][-1] == "2", os.listdir(input_folder_path))) # Change image title filter
-    output_folder_path = os.path.join(os.getcwd(), "dataset", "segmentation")
+    output_folder_path = os.path.join(os.getcwd(), "dataset", "segmentation","masks")
     
     for img_name in image_names:
         img_path = os.path.join(input_folder_path, img_name)
