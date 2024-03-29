@@ -28,3 +28,5 @@ if __name__ == "__main__":
         segmentation = fill_segmentation(mask)
         output_path = os.path.join(output_folder_path, img_name)
         cv.imwrite(output_path, segmentation)
+    
+    print("All files segmented.")
