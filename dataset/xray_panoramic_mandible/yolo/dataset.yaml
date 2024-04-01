@@ -1,5 +1,5 @@
-train: xray_panoramic_mandible/yolo/train
-val: xray_panoramic_mandible/yolo/valid
+train: train/images
+val: valid/images
 
 nc: 1
 names: ["mandible"]

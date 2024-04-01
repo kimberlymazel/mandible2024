@@ -13,5 +13,5 @@ def check_class(directory):
                 if len(lines) > 1:
                     print(filename)
 
-directory = 'dataset/xray_panoramic_mandible/txt'
+directory = 'dataset/xpm_annotate/txt'
 check_class(directory)
