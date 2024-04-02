@@ -13,5 +13,7 @@ def check_class(directory):
                 if len(lines) > 1:
                     print(filename)
 
-directory = 'dataset/xpm_annotate/txt'
-check_class(directory)
+if __name__ == "__main__":
+
+    directory = 'dataset/xpm_annotate/labels'
+    check_class(directory)
