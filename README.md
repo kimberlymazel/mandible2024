@@ -18,10 +18,9 @@ Folder containing different datasets used for the models
 
 ### models
 Folder containing PyTorch files of the trained models 
-- clahe_8vs.pt: CLAHE dataset model
 - roboflow_8vs.pt: XPM + noneed model
 - xpm_annotate.pt: XPM + annotations2 model
-- yolov8s.pt: XPM model
+- xpm.pt: XPM model
 
 ### scripts
 Automate processing
@@ -31,6 +30,3 @@ Source code
 
 ### test
 Test files
-
-### yolo_predictions
-Folder containing results of the models based on the box file
