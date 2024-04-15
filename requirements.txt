@@ -9,3 +9,4 @@ torch
 torchaudio
 torchvision
 ultralytics
+scikit-image
