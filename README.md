@@ -9,7 +9,6 @@ Folder containing different datasets used for the models
 - box
   - 500_700: 500-700 Pano Fang
   - teeth_nopins: Pano with teeth or no pins
-- merged: Merged dataset of [m3-ysqmd](https://universe.roboflow.com/noneed/m3-ysqmd) and [Mendeley](https://data.mendeley.com/datasets/hxt48yk462/1)
 - raw: First example of data
 - segmentation
   - masks: Segmented masks of annotations2
