@@ -3,11 +3,10 @@ import albumentations as A
 import cv2
 
 transform = A.Compose([
-    A.AdvancedBlur(p=1)
-    # A.CLAHE(),
-    # A.FancyPCA(),
+    #A.Blur(p=1)
+    # A.CLAHE(p=1)
     # A.RandomBrightnessContrast(),
-    # A.HorizontalFlip(),
+    A.HorizontalFlip(p=1)
     # A.Normalize()
 ])
 
@@ -21,25 +20,51 @@ os.makedirs(output_mask_dir, exist_ok=True)
 
 image_filenames = os.listdir(input_image_dir)
 
-for filename in image_filenames:
-    image_path = os.path.join(input_image_dir, filename)
-    mask_path = os.path.join(input_mask_dir, filename)
-    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)  
-    mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE)   
+def image_mask():
+    for filename in image_filenames:
+        image_path = os.path.join(input_image_dir, filename)
+        mask_path = os.path.join(input_mask_dir, filename)
+        image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)  
+        mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE)   
 
-    # -------------------------------------------------------------------------- #
-    # --------------------------- APPLY AUGMENTATION --------------------------- #
-    # -------------------------------------------------------------------------- #
-    transformed = transform(image=image, mask=mask)
-    transformed_image = transformed['image']
-    transformed_mask = transformed['mask']
+        if image.shape[:2] != mask.shape[:2]:
+                print(f"Error: Dimensions of {filename} and its mask do not match. Skipping.")
+                continue
 
-    # -------------------------------------------------------------------------- #
-    # --------------------------- SAVES AUGMENTATION --------------------------- #
-    # -------------------------------------------------------------------------- #
-    new_filename = filename.split('.')[0] + "_blur." + filename.split('.')[1]
+        # -------------------------------------------------------------------------- #
+        # --------------------------- APPLY AUGMENTATION --------------------------- #
+        # -------------------------------------------------------------------------- #
+        transformed = transform(image=image, mask=mask)
+        transformed_image = transformed['image']
+        transformed_mask = transformed['mask']
 
-    output_image_path = os.path.join(output_image_dir, new_filename)
-    output_mask_path = os.path.join(output_mask_dir, new_filename)
-    cv2.imwrite(output_image_path, transformed_image)
-    cv2.imwrite(output_mask_path, transformed_mask)
+        # -------------------------------------------------------------------------- #
+        # --------------------------- SAVES AUGMENTATION --------------------------- #
+        # -------------------------------------------------------------------------- #
+        new_filename = filename.split('.')[0] + "_hflip." + filename.split('.')[1]
+
+        output_image_path = os.path.join(output_image_dir, new_filename)
+        output_mask_path = os.path.join(output_mask_dir, new_filename)
+        cv2.imwrite(output_image_path, transformed_image)
+        cv2.imwrite(output_mask_path, transformed_mask)
+
+def image_only():
+    for filename in image_filenames:
+        image_path = os.path.join(input_image_dir, filename)      
+        image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)     
+
+        # -------------------------------------------------------------------------- #
+        # --------------------------- APPLY AUGMENTATION --------------------------- #
+        # -------------------------------------------------------------------------- #
+        transformed = transform(image=image)
+        transformed_image = transformed['image']
+
+        # -------------------------------------------------------------------------- #
+        # --------------------------- SAVES AUGMENTATION --------------------------- #
+        # -------------------------------------------------------------------------- #
+        new_filename = filename.split('.')[0] + "_CLAHE." + filename.split('.')[1]
+
+        output_image_path = os.path.join(output_image_dir, new_filename)
+        cv2.imwrite(output_image_path, transformed_image)
+
+image_mask()

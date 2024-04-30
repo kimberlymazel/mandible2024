@@ -12,6 +12,6 @@ def count_file(dir):
 
 if __name__ == "__main__":
 
-    directory = "dataset/xpm_annotate/masks"
+    directory = "dataset/augmented/masks"
 
     count_file(directory)
