@@ -5,9 +5,11 @@ import cv2
 transform = A.Compose([
     #A.Blur(p=1)
     # A.CLAHE(p=1)
-    # A.RandomBrightnessContrast(),
-    A.HorizontalFlip(p=1)
-    # A.Normalize()
+    # A.RandomBrightnessContrast(p=1, brightness_limit=0, contrast_limit=-0.5)
+    # A.HorizontalFlip(p=1)
+    # A.SafeRotate(p=1, limit=(-10, 10))
+    # A.GaussianBlur(p=1, blur_limit=(55,55))
+    A.RandomGamma(p=1, gamma_limit = (150,150))
 ])
 
 input_image_dir = "dataset/xpm_annotate/images"
@@ -41,7 +43,7 @@ def image_mask():
         # -------------------------------------------------------------------------- #
         # --------------------------- SAVES AUGMENTATION --------------------------- #
         # -------------------------------------------------------------------------- #
-        new_filename = filename.split('.')[0] + "_hflip." + filename.split('.')[1]
+        new_filename = filename.split('.')[0] + "_rgamma150." + filename.split('.')[1]
 
         output_image_path = os.path.join(output_image_dir, new_filename)
         output_mask_path = os.path.join(output_mask_dir, new_filename)
@@ -62,7 +64,7 @@ def image_only():
         # -------------------------------------------------------------------------- #
         # --------------------------- SAVES AUGMENTATION --------------------------- #
         # -------------------------------------------------------------------------- #
-        new_filename = filename.split('.')[0] + "_CLAHE." + filename.split('.')[1]
+        new_filename = filename.split('.')[0] + "_bright2." + filename.split('.')[1]
 
         output_image_path = os.path.join(output_image_dir, new_filename)
         cv2.imwrite(output_image_path, transformed_image)

@@ -17,5 +17,5 @@ def delete_by_name(directory, suffix):
 
 # Example usage
 directory_path = "dataset/augmented/masks"
-suffix_to_delete = "_hflip.png"
+suffix_to_delete = "_gblur25.png"
 delete_by_name(directory_path, suffix_to_delete)
