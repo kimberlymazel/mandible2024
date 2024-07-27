@@ -11,8 +11,8 @@ def count_file(dir):
     print("Total number of files in the directory:", file_count)
 
 if __name__ == "__main__":
-    directory1 = "dataset/tinonewpano"
-    directory2 = "dataset/predicted"
+    directory1 = "dataset/xray_panoramic_mandible/images"
+    directory2 = "dataset/augmented/images"
 
     count_file(directory1)
     count_file(directory2)

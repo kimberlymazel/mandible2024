@@ -5,7 +5,8 @@ Folder to store results of different models for comparation
 
 ### dataset
 Folder containing different datasets used for the models
-- annotations & annotations2: Files from Ms. Merve
+- annotations & annotations2: Files from Dr. Merve
+- augmented: Dataset after undergoing augmentation
 - box
   - 500_700: 500-700 Pano Fang
   - teeth_nopins: Pano with teeth or no pins
@@ -29,3 +30,6 @@ Source code
 
 ### test
 Test files
+
+## Other Resources
+All model files and datasets (train, test, valid) can be accessed in [this drive](https://drive.google.com/drive/folders/1Y7fsykTYCCynfie4zNxa7aHkP08ri30k)
