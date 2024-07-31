@@ -16,6 +16,6 @@ def delete_by_name(directory, suffix):
                 print(f"Error deleting {file_path}: {e}")
 
 # Example usage
-directory_path = "dataset/augmented/masks"
-suffix_to_delete = "_gblur25.png"
+directory_path = "dataset/augmented/images"
+suffix_to_delete = "_rgamma150.png"
 delete_by_name(directory_path, suffix_to_delete)
