@@ -28,7 +28,7 @@ def process_images(source_dir, dest_dir, width, height):
         os.makedirs(dest_dir)
     
     for filename in os.listdir(source_dir):
-        if filename.endswith(".jpg") or filename.endswith(".png"):  # Add other extensions if needed
+        if filename.endswith(".tiff") or filename.endswith(".png"):  # Add other extensions if needed
             image_path = os.path.join(source_dir, filename)
             image = cv2.imread(image_path)
             if image is None:
@@ -41,7 +41,7 @@ def process_images(source_dir, dest_dir, width, height):
             print(f"Processed and saved {filename} to {dest_dir}")
 
 # Example usage
-source_directory = "convert/png"
+source_directory = "convert/original"
 destination_directory = "convert/padded"
 target_width = 1000  # Change as needed
 target_height = 1000  # Change as needed
