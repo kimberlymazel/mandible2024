@@ -12,7 +12,7 @@ def count_file(dir):
 
 if __name__ == "__main__":
     directory1 = "forvin/measure"
-    directory2 = "forvin/predictions"
+    directory2 = "forvin/predicted"
 
     count_file(directory1)
     count_file(directory2)
