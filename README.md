@@ -32,4 +32,4 @@ Source code
 Test files
 
 ## Other Resources
-All model files and datasets (train, test, valid) can be accessed in [this drive](https://drive.google.com/drive/folders/1Y7fsykTYCCynfie4zNxa7aHkP08ri30k)
+All model files and datasets (train, test, valid) can be accessed in [this drive](https://binusianorg-my.sharepoint.com/personal/kimberly_mazel_binus_ac_id/_layouts/15/guestaccess.aspx?share=Eqe5sPZV8hBDl0rpGt-cZ5kBwBGeHHPr5ujGMjWP21kzlQ&e=ppAGYa)
