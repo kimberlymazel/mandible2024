@@ -85,9 +85,9 @@ def process_images(input_dir, output_dir, model_path, target_size):
         print(f"Saved mask to {output_path}")
 
 if __name__ == "__main__":
-    input_dir = '../../forvin/measure'  # Path to the input image directory
-    output_dir = '../../forvin/predicted'  # Path to the output directory for predicted masks
-    model_path = "../../models/unetpp_model.h5"  # Path to the trained model file
+    input_dir = 'forvin/measure'  # Path to the input image directory
+    output_dir = 'forvin/unet'  # Path to the output directory for predicted masks
+    model_path = "models/unet.h5"  # Path to the trained model file
     target_size = (128, 128) # Target size of the image
 
     # Process images
