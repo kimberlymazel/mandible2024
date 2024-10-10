@@ -86,8 +86,8 @@ def process_images(input_dir, output_dir, model_path, target_size):
 
 if __name__ == "__main__":
     input_dir = 'forvin/measure'  # Path to the input image directory
-    output_dir = 'forvin/fcn'  # Path to the output directory for predicted masks
-    model_path = "models/fcn.h5"  # Path to the trained model file
+    output_dir = 'forvin/segnet'  # Path to the output directory for predicted masks
+    model_path = "models/segnet.h5"  # Path to the trained model file
     target_size = (128, 128) # Target size of the image
 
     # Process images
