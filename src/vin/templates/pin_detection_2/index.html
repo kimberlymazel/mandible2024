@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Mandible Project</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div>
+      <div>
+        <!-- <h2>Scharr + Meijering + Sato #{{ id }}</h2> -->
+        <div>{{ combined_image | safe }}</div>
+      </div>
+      <div>
+        <h2>Thresholding + Segmentation 1</h2>
+        <div>{{ thresholding_segmentation_1 | safe }}</div>
+      </div>
+      <div>
+        <h2>Thresholding + Segmentation 2</h2>
+        <div>{{ thresholding_segmentation_2 | safe }}</div>
+      </div>
+      <div>
+        <h2>Thresholding + Segmentation 3</h2>
+        <div>{{ thresholding_segmentation_3 | safe }}</div>
+      </div>
+      <div>
+        <h2>Pin Measurement</h2>
+        <div>{{ measurement }}</div>
+        <div>{{ pin_measurement | safe }}</div>
+      </div>
+    </div>
+  </body>
+</html>

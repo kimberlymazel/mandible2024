@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>Mandible Project</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div>
+      <h2>Raw X-Ray Image #{{ id }}</h2>
+      <div>
+        <div>{{ raw_image | safe }}</div>
+        <div>{{ raw_histogram | safe }}</div>
+      </div>
+    </div>
+    <div>
+      <h2>Cumulative Limited Adaptive Histogram Equalization (CLAHE) #{{ id }}</h2>
+      <div>
+        <div>{{ clahe_image | safe }}</div>
+        <div>{{ clahe_histogram | safe }}</div>
+      </div>
+    </div>
+    <div>
+      <h2>Scharr Edge Detection #{{ id }}</h2>
+      <div>
+        <div>{{ scharr_image | safe }}</div>
+        <div>{{ scharr_histogram | safe }}</div>
+      </div>
+    </div>
+    <div>
+      <h2>Meijering + Sato Ridge Filter #{{ id }}</h2>
+      <div>
+        <div>{{ meijering_sato_image | safe }}</div>
+        <div>{{ meijering_sato_histogram | safe }}</div>
+      </div>
+    </div>
+    <div>
+    <div>
+        <h2>Scharr + Meijering + Sato #{{ id }}</h2>
+      <div>
+        <div>{{ combined_image | safe }}</div>
+        <div>{{ combined_histogram | safe }}</div>
+      </div>
+    </div>
+    <div>
+  </body>
+</html>
