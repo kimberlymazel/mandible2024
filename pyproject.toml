@@ -15,6 +15,7 @@ seaborn = "^0.13.2"
 jupytext = "^1.16.4"
 pynvim = "^0.5.0"
 jupyter-client = "^8.6.2"
+imagecodecs = "^2024.9.22"
 
 
 [build-system]
