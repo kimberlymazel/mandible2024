@@ -1,12 +1,11 @@
 import os
-import numpy as np
-from numpy import ndarray
-import cv2 as cv
-from pathlib import Path
-import asyncio
 import skimage
 import argparse
+import cv2 as cv
+import numpy as np
 from time import time
+from pathlib import Path
+from numpy import ndarray
 
 
 def sobel_edge_detection(img: ndarray) -> ndarray:
@@ -263,41 +262,53 @@ if __name__ == "__main__":
     assert os.path.isfile(args.input), "input need to be a valid file"
     assert Path(args.input).name.split(".")[-1] in ["tiff"], "input need to be a .tiff"
 
+    # =========CHANGE THIS PART =================
     assert os.path.isfile(args.mask), "mask need to be a valid file"
     assert Path(args.mask).name.split(".")[-1] in ["tiff"], "mask need to be a .tiff"
+    # ===========================================
 
-    start = time()
-    raw = skimage.io.imread(args.input, as_gray=True, plugin="tifffile")
-    mask = skimage.io.imread(args.mask, as_gray=True, plugin="tifffile")
+    try:
+        start = time()
+        raw = skimage.io.imread(args.input, as_gray=True, plugin="tifffile")
 
-    y, x = np.argwhere(mask > 0).T
-    min_x, max_x = np.min(x), np.max(x)
-    min_y, max_y = np.min(y), np.max(y)
+        # =========CHANGE THIS PART =================
+        # mask suppose to be 2 dimension (gray-scale) ndarray type
+        mask = skimage.io.imread(args.mask, as_gray=True, plugin="tifffile")
+        # ===========================================
 
-    raw = raw[min_y:max_y, min_x:max_x]
+        y, x = np.argwhere(mask > 0).T
+        min_x, max_x = np.min(x), np.max(x)
+        min_y, max_y = np.min(y), np.max(y)
 
-    clahe = skimage.exposure.equalize_adapthist(raw)
-    scharr = scharr_edge_detection(clahe)
-    meijering_sato = meijering_sato_ridge_filter(clahe)
-    combined = skimage.exposure.rescale_intensity(
-        scharr + meijering_sato, in_range="image"
-    )
-    combined = skimage.util.img_as_ubyte(combined)
-    _thresholding_segmentation_3 = thresholding_segmentation_3(combined)
-    pin_mask, left, right = pin_measurement(_thresholding_segmentation_3)
-    left_pin_height = measure_length(left[0][0], left[1][0], left[0][1], left[1][1])
-    right_pin_height = measure_length(
-        right[0][0], right[1][0], right[0][1], right[1][1]
-    )
+        raw = raw[min_y:max_y, min_x:max_x]
 
-    right_mandible_height, left_mandible_height = mandible_height(mask)
+        clahe = skimage.exposure.equalize_adapthist(raw)
+        scharr = scharr_edge_detection(clahe)
+        meijering_sato = meijering_sato_ridge_filter(clahe)
+        combined = skimage.exposure.rescale_intensity(
+            scharr + meijering_sato, in_range="image"
+        )
+        combined = skimage.util.img_as_ubyte(combined)
+        _thresholding_segmentation_3 = thresholding_segmentation_3(combined)
+        pin_mask, left, right = pin_measurement(_thresholding_segmentation_3)
+        left_pin_height = measure_length(left[0][0], left[1][0], left[0][1], left[1][1])
+        right_pin_height = measure_length(
+            right[0][0], right[1][0], right[0][1], right[1][1]
+        )
 
-    left_height, right_height = (
-        (left_mandible_height / left_pin_height) * 0.8,
-        (right_mandible_height / right_pin_height) * 0.8,
-    )
+        right_mandible_height, left_mandible_height = mandible_height(mask)
 
-    print("left height", left_height, "cm")
-    print("right height", right_height, "cm")
+        left_height, right_height = (
+            (left_mandible_height / left_pin_height) * 0.8,
+            (right_mandible_height / right_pin_height) * 0.8,
+        )
 
-    end = time()
+        print(f"left mandible height: {round(left_height, 2)} cm")
+        print(f"right mandible height: {round(right_height, 2)} cm")
+
+        end = time()
+
+        print(f"It took {round(end - start, 2)} sec to measure")
+
+    except Exception as e:
+        print(f"An error has occured, {e}")
