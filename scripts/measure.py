@@ -153,19 +153,27 @@ def pin_measurement(img: ndarray):
         min_right = float("inf")
         min_right_index = 0
 
-        _x1, _y1 = left[0][0]
-        _x2, _y2 = left[0][1]
+        _lx1, _ly1 = left[0][0]
+        _lx2, _ly2 = left[0][1]
 
-        left_height = np.sqrt((_x2 - _x1) ** 2 + (_y2 - _y1) ** 2)
-        for i, r in enumerate(right):
-            x1, y1 = r[0]
-            x2, y2 = r[1]
+        _rx1, _ry1 = right[0][0]
+        _rx2, _ry2 = right[0][1]
 
-            right_height = np.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
-            height = abs(right_height - left_height)
-            if min_right > height:
-                min_right = height
-                min_right_index = i
+        left_height = np.sqrt((_lx2 - _lx1) ** 2 + (_ly2 - _ly1) ** 2)
+        right_height = np.sqrt((_rx2 - _rx1) ** 2 + (_ry2 - _ry1) ** 2)
+
+        print(left_height)
+        print(right_height)
+
+        if left_height > 5 or left_height < 1:
+            left_height = right_height
+
+        elif right_height > 5 or right_height < 1:
+            right_height = left_height
+
+        elif left_height > 5 and right_height > 5:
+            left_height = 0
+            right_height = 0
 
         return img_copy, left[0], right[min_right_index]
     else:
@@ -251,7 +259,21 @@ def measure_length(x1: int, x2: int, y1: int, y2: int):
     return np.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
 
 
+def bone_height_classification(height: float):
+    if height >= 2.1:
+        return "Class 1"
+    elif 1.6 >= height >= 2:
+        return "Class 2"
+    elif 1.1 >= height >= 1.5:
+        return "Class 3"
+    else:
+        return "Class 4"
+
+
 if __name__ == "__main__":
+    # =========CHANGE THIS PART =================
+    # Take input from console command
+    #
     parser = argparse.ArgumentParser()
 
     parser.add_argument("input", help="Input file")
@@ -262,10 +284,11 @@ if __name__ == "__main__":
     assert os.path.isfile(args.input), "input need to be a valid file"
     assert Path(args.input).name.split(".")[-1] in ["tiff"], "input need to be a .tiff"
 
-    # =========CHANGE THIS PART =================
     assert os.path.isfile(args.mask), "mask need to be a valid file"
     assert Path(args.mask).name.split(".")[-1] in ["tiff"], "mask need to be a .tiff"
     # ===========================================
+
+    default_pin_height_px = 200  # TODO: need to recalculate default pin height
 
     try:
         start = time()
@@ -291,6 +314,7 @@ if __name__ == "__main__":
         combined = skimage.util.img_as_ubyte(combined)
         _thresholding_segmentation_3 = thresholding_segmentation_3(combined)
         pin_mask, left, right = pin_measurement(_thresholding_segmentation_3)
+
         left_pin_height = measure_length(left[0][0], left[1][0], left[0][1], left[1][1])
         right_pin_height = measure_length(
             right[0][0], right[1][0], right[0][1], right[1][1]
@@ -298,13 +322,24 @@ if __name__ == "__main__":
 
         right_mandible_height, left_mandible_height = mandible_height(mask)
 
-        left_height, right_height = (
-            (left_mandible_height / left_pin_height) * 0.8,
-            (right_mandible_height / right_pin_height) * 0.8,
-        )
+        left_height = (left_mandible_height / left_pin_height) * 0.9
+        right_height = (right_mandible_height / right_pin_height) * 0.9
 
-        print(f"left mandible height: {round(left_height, 2)} cm")
-        print(f"right mandible height: {round(right_height, 2)} cm")
+        if (left_height > 5 or left_height < 1) and (
+            right_height < 5 or right_height > 1
+        ):
+            left_height = (left_mandible_height / right_pin_height) * 0.9
+        elif (left_height < 5 or left_height > 1) and (
+            right_height > 5 or right_height < 1
+        ):
+            right_height = (right_mandible_height / left_pin_height) * 0.9
+
+        print(
+            f"left mandible height: {round(left_height, 2)} cm, {bone_height_classification(left_height)}"
+        )
+        print(
+            f"right mandible height: {round(right_height, 2)} cm, {bone_height_classification(right_height)}"
+        )
 
         end = time()
 

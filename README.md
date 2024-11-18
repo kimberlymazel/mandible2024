@@ -40,7 +40,7 @@ Before running measure.py, please make sure the following python package are ins
 - opencv-python
 - scikit-image
 - numpy
-- imagecodecs
+- imagecodecs (for tiff image)
 
 Run using the following command:
 
