@@ -427,12 +427,12 @@ def get_measurement(input_dir, mask_dir):
         ):
             right_height = (right_mandible_height / left_pin_height) * 0.9
 
-        return round(left_height, 2), round(right_height, 2)
+        return left_height, right_height
 
     except IndexError:
         left_height = 2.17887323943662
         right_height = 2.08085577277757
-        return round(left_height, 2), round(right_height, 2)
+        return left_height, right_height
 
     except Exception as e:
         raise RuntimeError(f"An error has occurred: {e}")
@@ -440,7 +440,7 @@ def get_measurement(input_dir, mask_dir):
 
 if __name__ == "__main__":
     input_dir = "forvin/measure"
-    output_dir = "forvin/test"
+    output_dir = "forvin/unetpp"
     model_path = "models/unetpp.h5"
     target_size = (128, 128)
 
@@ -458,9 +458,9 @@ if __name__ == "__main__":
                 "Image Name",
                 "Left Measurement",
                 "Right Measurement",
-                "Segmentation Time (s)",
-                "Measurement Time (s)",
-                "Total Time (s)",
+                "Segmentation Time (ms)",
+                "Measurement Time (ms)",
+                "Total Time (ms)",
             ]
         )
 
@@ -487,9 +487,9 @@ if __name__ == "__main__":
         # ============================#
         # ====== CALCULATE TIME ======#
         # ============================#
-        segment_time = round(end_segment - start_segment, 2)
-        measure_time = round(end_measure - start_measure, 2)
-        total_time = round(segment_time + measure_time, 2)
+        segment_time = (end_segment - start_segment) * 1000
+        measure_time = (end_measure - start_measure) * 1000
+        total_time = (segment_time + measure_time) * 1000
 
         # Write the data (including measurements and timing) to the CSV file
         with open(csv_path, mode="a", newline="") as csv_file:
@@ -506,5 +506,5 @@ if __name__ == "__main__":
             )
 
         print(
-            f"Processed {os.path.basename(image)}:, Left={left_measurement}, Right={right_measurement}, Segmentation={segment_time}s, Measurement={measure_time}s, Total={total_time}s"
+            f"Processed {os.path.basename(image)}, Left={left_measurement}, Right={right_measurement}, Segmentation={segment_time}ms, Measurement={measure_time}ms, Total={total_time}ms"
         )
